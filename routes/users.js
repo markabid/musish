@@ -35,7 +35,7 @@ router.post('/authenticate', function(req, res, next){
       throw err;
     }
     if(!user){
-      return res.json({success: false, msg: "User not found"});
+      return res.json({success: false, msg: "Username not found"});
     }
     User.comparePassword(password, user.password, function(err, isMatch){
       if(err){
