@@ -29,6 +29,7 @@ router.post('/register', function(req, res, next){
 router.post('/authenticate', function(req, res, next){
   const username = req.body.username;
   const password = req.body.password;
+  const rememberMe = req.body.rememberMe;
 
   User.getUserByUsername(username, function(err, user){
     if(err){
@@ -42,9 +43,19 @@ router.post('/authenticate', function(req, res, next){
         throw err;
       }
       if(isMatch){
-        const token = jwt.sign({data: user}, config.secret,{
-          expiresIn: 604800 //1 week
-        });
+        let token = null;
+        if(rememberMe){
+          console.log("1 yr");
+          token = jwt.sign({data: user}, config.secret,{
+            expiresIn: 31540000 //1 year
+          });
+        }
+        else{
+          console.log("1 day");
+          token = jwt.sign({data: user}, config.secret,{
+            expiresIn: 86400 //24hrs
+          });
+        }
         res.json({
           success: true,
           token: 'JWT ' + token,

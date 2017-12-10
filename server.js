@@ -40,7 +40,6 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-
 app.use('/users', users);
 
 //index route
@@ -50,7 +49,7 @@ app.get('/', function(req, res){
 
 //sends other routes to index
 app.get('*', function(res, req){
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+  res.sendFile(path.join(__dirname, 'client/index.html'));
 });
 
 //start server
