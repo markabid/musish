@@ -45,13 +45,11 @@ router.post('/authenticate', function(req, res, next){
       if(isMatch){
         let token = null;
         if(rememberMe){
-          console.log("1 yr");
           token = jwt.sign({data: user}, config.secret,{
             expiresIn: 31540000 //1 year
           });
         }
         else{
-          console.log("1 day");
           token = jwt.sign({data: user}, config.secret,{
             expiresIn: 86400 //24hrs
           });
