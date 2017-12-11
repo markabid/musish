@@ -36,7 +36,7 @@
                 <a class="nav-link" (click)="onLogoutClick()" href="#">Log out</a>
             </li>
             <li *ngIf="authService.loggedIn()" class="nav-item">
-                <a class="nav-link" [routerLink]="['/post']">Post</a>
+                <a class="nav-link" (click)="open(content)">Post</a>
             </li>
           </ul>
         
@@ -48,5 +48,21 @@
 
       </div>
     </nav>
+
+    <!-- for modal popup to post  -->
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">New post</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control" id="content" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark">Share</button>
+        </div>
+      </ng-template>
 
 <!--> source code from https://getbootstrap.com/docs/4.0/examples/starter-template/# -->
