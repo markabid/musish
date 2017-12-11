@@ -19,4 +19,8 @@ export class ValidateService {
     return re.test(email);
   }
 
+  validatePost(post){
+    return post.content.length > 0;
+  }
+
 }

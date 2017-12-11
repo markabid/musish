@@ -35,6 +35,9 @@
             <li *ngIf="authService.loggedIn()" class="nav-item">
                 <a class="nav-link" (click)="onLogoutClick()" href="#">Log out</a>
             </li>
+            <li *ngIf="authService.loggedIn()" class="nav-item">
+                <a class="nav-link" [routerLink]="['/post']">Post</a>
+            </li>
           </ul>
         
         <!-- search bar left -->
