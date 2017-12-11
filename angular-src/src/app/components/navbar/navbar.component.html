@@ -36,7 +36,7 @@
                 <a class="nav-link" (click)="onLogoutClick()" href="#">Log out</a>
             </li>
             <li *ngIf="authService.loggedIn()" class="nav-item">
-                <a class="nav-link" (click)="open(content)">Post</a>
+                <a class="nav-link" (click)="open(modal)">Post</a>
             </li>
           </ul>
         
@@ -50,7 +50,7 @@
     </nav>
 
     <!-- for modal popup to post  -->
-    <ng-template #content let-c="close" let-d="dismiss">
+    <ng-template #modal let-c="close" let-d="dismiss">
         <div class="modal-header">
           <h4 class="modal-title">New post</h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -58,10 +58,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <textarea class="form-control" id="content" rows="3"></textarea>
+          <textarea class="form-control" [(ngModel)]="content" name="content" id="modalText" rows="3"></textarea>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark">Share</button>
+          <button type="button" class="btn btn-outline-dark" (click)="onPostClick()" >Share</button>
         </div>
       </ng-template>
 
