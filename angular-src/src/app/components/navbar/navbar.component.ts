@@ -12,6 +12,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  modalReference: any;
 
   closeResult: String;
   name: String;
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit {
   //for modal popup
 
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -52,7 +54,6 @@ export class NavbarComponent implements OnInit {
       content: this.content,
       time: this.time
     }
-    console.log(this.content);
     if(!this.validateService.validatePost(post)){
       this.flashMessage.show('Please enter a post', {cssClass: 'alert-danger', timeout: 6000});
       return false;
@@ -66,6 +67,7 @@ export class NavbarComponent implements OnInit {
     this.postService.savePost(post).subscribe(data => {
       if(data.success){
         this.flashMessage.show('Post Saved!', {cssClass: 'alert-success', timeout: 6000});
+        this.modalReference.close();
         this.router.navigate(['/dashboard']);
       }
       else{

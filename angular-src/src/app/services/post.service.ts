@@ -9,7 +9,6 @@ export class PostService {
   constructor(private http: Http) { }
 
   savePost(post){
-    console.log("yo");
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/posts/post', post, {headers: headers})
